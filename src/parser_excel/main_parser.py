@@ -1,7 +1,7 @@
 from .excel import Parser_Excel
 import os
-from db.database import Base, engine, SessionLocal
-from db.crud import Database
+from db_pack.database import Base, engine, SessionLocal
+from db_pack.crud import Database
 import logging
 
 
@@ -23,4 +23,4 @@ def start_parser(Path: str):
         parser.parse()
 
         db.insert_database(data=parser.output_data)
-    db.get_list_group_and_student('','')
+    print(db.get_list_auditory())

@@ -1,7 +1,7 @@
 import openpyxl
 from datetime import datetime
 import collections
-from db.model import *
+from db_pack.model import *
 from abc import ABC, abstractmethod
 import random
 
@@ -26,52 +26,72 @@ class Parser_Excel(BaseDataProcess):
         self.__file = openpyxl.load_workbook(full_path)
         self.name_group = full_path[full_path.find('(')+1 : full_path.find(',')]
         self.sheet = self.__file.active
-        # self.spec = name_group.split('-')[0]
-        # self.course = name_group.split('-')[1][0]
-        # self.number = name_group.split('-')[1][1:]
-        # self.output_data = []
-        # self.subjects = kwargs['subjects']
-        # self.groups = kwargs['groups']
-        # self.teachers = kwargs['teachers']
-        # self.auditorys = kwargs['auditorys']
+        self.spec = self.name_group.split('-')[0]
+        self.course = self.name_group.split('-')[1][0]
+        self.number = self.name_group.split('-')[1][1:]
+        self.output_data = []
+        self.subjects = kwargs['subjects']
+        print(self.subjects)
+        self.groups = kwargs['groups']
+        self.teachers = kwargs['teachers']
+        self.auditorys = kwargs['auditorys']
         self.faculty = faculty[random.randint(0, 1)]
         print()
     def parse(self):
         length = self.sheet.max_row
-        old_timetable = {}
         schedule = []
 
         #timetable = TimeTable(faculty=Faculty(name='FIRT'))
         for i in range(2, length + 1):
             value = self.sheet.cell(row=i, column=1).value
+            timetable = TimeTable()
+            lesson = Lesson()
+
+            group = Group(course=self.course, spec = self.spec, number = self.number, id_faculty=1)
+            timetable.group=group
             try:
                 date = datetime.strptime(value, "%d.%m.%Y")
-                old_timetable[date] = {}
-                schedule.append(Schedule(date=date))
-                schedule[-1].faculty = self.faculty
-                schedule[-1].name_group = self.name_group
+                lesson.date = date
+                lesson.number = 1
             except TypeError:
                 for col in range(2,5):
-                    [last] = collections.deque(old_timetable, maxlen=1)
                     value = self.sheet.cell(row=i, column=col).value
                     if col == 2:
-                        old_timetable[last]['time'] = value
-                        schedule[-1].time = value
-
+                        pass
                     elif col == 3:
-                        old_timetable[last]['type'],old_timetable[last]['name_subject'] = str(value).split(' ',maxsplit=1)
-                        schedule[-1].type, schedule[-1].name_subject = str(value).split(' ',maxsplit=1)
+                        type_lesson, name_subject = str(value).split(' ',maxsplit=1)
+                        print(name_subject)
+                        if name_subject in self.subjects:
+                            lesson.id_subject = self.subjects.index(name_subject)+1
+                            print()
+                        else:
+                            subject = Subject(name=name_subject)
+                            lesson.subject = subject
                     elif col == 4:
                         val = str(value).split("\n")
-                        old_timetable[last]['name_teacher'] = val[0]
-                        old_timetable[last]['auditory'] = val[1].split()[1]
-                        #old_timetable[last]['faculty'] = faculty[random.randint(0,1)]
+                        name_teacher = val[0]
+                        auditory_val = val[1].split()[1]
 
-                        schedule[-1].name_teacher = val[0]
-                        schedule[-1].auditory = val[1].split()[1]
+                        if name_teacher in self.teachers:
+                            timetable.id_teacher = self.teachers.index(name_teacher)+1
+                        else:
+                            teacher = Teacher()
+                            teacher.name = name_teacher
+                            timetable.teacher = teacher
+
+                        if auditory_val in self.auditorys:
+                            lesson.id_auditory = self.auditorys.index(auditory_val)+1
+                        else:
+                            auditory = Auditory()
+                            auditory.name = auditory_val
+                            lesson.auditory = auditory
+
+                        timetable.lesson = lesson
 
 
+            schedule.append(timetable)
         self.output_data = schedule
+
 
     # def parse_name_group(self, full_path):
     #     name_group = full_path[full_path.find('(') + 1: full_path.find(',')]
@@ -82,3 +102,4 @@ class Parser_Excel(BaseDataProcess):
     #     self.number = name_group.split('-')[1][1:]
     #     self.sheet = self.__file.active
     #     self.output_data = []
+
