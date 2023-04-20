@@ -1,17 +1,30 @@
-from parser_excel.excel import Parser
-import os
-from db.database import Base, engine, SessionLocal
-from db.crud import insert_database
+from fastapi import Depends, FastAPI, HTTPException
+from routers import group
+
+#from db_pack.crud import Database
+#from db import crud, model
+from routers import group
+#from db.database import SessionLocal, engine
 
 
-if __name__ == '__main__':
-    excel_path = []
-    Base.metadata.create_all(engine)
-    for address, dirs, files in os.walk('C:/Домашняя работа/Управление проектами/schedule_excel'):
-        for name in files:
-            excel_path.append(os.path.join(address, name))
-    for path in excel_path:
-        path = path.replace('~$','')
-        parser = Parser(path)
-        data = parser.parse()
-        insert_database(session=SessionLocal(),data=data)
+app = FastAPI()
+app.include_router(group.router)
+# #
+# @app.get("/filter")
+# def filter(faculty: str, group: str, week:int):
+#     return {123}
+#     db = Database()
+#     res = db.get_list_group_and_student(faculty, name_group= group)
+#     return res
+
+
+
+
+
+
+
+# from parser_excel.main_parser import start_parser
+#
+#
+# if __name__ == '__main__':
+#     start_parser('C:/Домашняя работа/Управление проектами/schedule_excel')
