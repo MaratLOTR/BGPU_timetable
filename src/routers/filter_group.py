@@ -8,15 +8,15 @@ group_by_filter = [{
 		"data": [
 		{
 			"course": 1,
-			"group": ["MO-111", "PRO-123"]
+			"group": ["МО-111", "ПРО-123"]
 		},
 		{
 			"course": 2,
-			"group": ["MO-222", "PRO-223"]
+			"group": ["МО-222", "ПРО-223"]
 		},
 		{
 			"course": 3,
-			"group": ["MO-333", "PRO-367"]
+			"group": ["МО-333", "ПРО-329"]
 		}
 				]
 	},
@@ -25,15 +25,15 @@ group_by_filter = [{
 		"data": [
 		{
 			"course": 1,
-			"group": ["I-111", "M-123"]
+			"group": ["И-111", "М-123"]
 		},
 		{
 			"course": 2,
-			"group": ["I-222", "M-223"]
+			"group": ["И-222", "М-223"]
 		},
 		{
 			"course": 3,
-			"group": ["M-333", "I-367"]
+			"group": ["И-333", "М-367"]
 		}
 				]
 	}]
