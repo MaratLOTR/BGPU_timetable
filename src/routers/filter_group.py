@@ -55,12 +55,8 @@ def get_all_week():
 
 @router.get("/group_by_filter")
 def get_group_by_filter(faculty: str, course: int):
-    if faculty == 'ФИРТ':
-        for filt in group_by_filter:
-            print(filt['faculty'])
-            if filt['faculty'] == 'ФИРТ':
-                for cour in filt['data']:
-                    if cour['course'] == course:
-                        return cour['group']
-    elif faculty == 'ИНЭК':
-        pass
+    for filt in group_by_filter:
+        if filt['faculty'] == faculty:
+            for cour in filt['data']:
+                if cour['course'] == course:
+                    return cour['group']
