@@ -2,7 +2,7 @@ from fastapi import APIRouter
 router = APIRouter()
 from db_pack import fake_query
 import datetime
-#from fake_schedule_group import schedule_by_name_group_and_week
+from .create_new_schedule import create_fake_schedule
 def get_day_of_the_week_by_date(date):
     day_of_the_week = {1:"Пн",
                        2:"Вт",
@@ -42,3 +42,13 @@ def get_enable_filter_auditory():
 @router.get("/getDaysOfWeek")
 def get_date_by_week(week:str):
     return [get_days_by_week(int(week))]
+
+
+schedule = create_fake_schedule()
+@router.get("/scheduleForADay")
+def get_schedule_for_day(group: str, week: str, day_of_the_week: str):
+    schedule_in_a_day = []
+    for sch in schedule:
+        if sch['groupName'] == group and sch['week'] == week and sch['dayOfTheWeek'] == day_of_the_week:
+            schedule_in_a_day.append(sch)
+    return schedule_in_a_day
