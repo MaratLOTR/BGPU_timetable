@@ -59,7 +59,7 @@ def generate_schedule_in_day(list_of_pair_lesson_teacher, number_lesson, number_
     date = date+datetime.timedelta(weeks=number_of_week, days=day)
     schedule_in_a_day = {
         'lessonName':list_of_pair_lesson_teacher[k].lesson,
-        'nameTeacher':list_of_pair_lesson_teacher[k].teacher,
+        'teacherName':list_of_pair_lesson_teacher[k].teacher,
         'classRoom': str(random.randint(1,9))+"-"+str(random.randint(1,9)*100+random.randint(1,9)*10+random.randint(1,9)),
         'lessonType': list_of_type_lesson[random.randint(0,1)],
         'startSubject': list_of_time_lesson[number_lesson][0],
@@ -76,7 +76,7 @@ def create_fake_schedule():
                      "И-333", "М-367"]
     list_of_pair_teacher_lesson = generate_pair_teacher_lesson()
     for group in list_of_group:
-        for week in range(1,10):
+        for week in range(0,10):
             for day in range(0,6):
                 count_of_lesson = random.randint(1,4)
                 for number_of_lesson in range(1, count_of_lesson):

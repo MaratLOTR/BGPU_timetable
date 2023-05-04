@@ -50,5 +50,14 @@ def get_schedule_for_day(group: str, week: str, day_of_the_week: str):
     schedule_in_a_day = []
     for sch in schedule:
         if sch['groupName'] == group and sch['week'] == week and sch['dayOfTheWeek'] == day_of_the_week:
-            schedule_in_a_day.append(sch)
+            response_sch = sch.copy()
+            del response_sch['week']
+            del response_sch['groupName']
+            del response_sch['date']
+            del response_sch['dayOfTheWeek']
+            # response_sch.pop('week')
+            # response_sch.pop('groupName')
+            # response_sch.pop('date')
+            # response_sch.pop('dayOfTheWeek')
+            schedule_in_a_day.append(response_sch)
     return schedule_in_a_day
