@@ -1,29 +1,7 @@
 import random
 import datetime
 from utils.date import get_day_of_the_week_by_date
-list_of_lesson_name = ["Oneal",
-                            "Duarte",
-                            "Brown",
-                            "Marsh",
-                            "Silva",
-                            "Petersen"]
-list_of_teacher_name = ["Oneal",
-                            "Duarte",
-                            "Brown",
-                            "Marsh",
-                            "Silva",
-                            "Petersen",
-                            "Mcpherson",
-                            "Ferguson",
-                            "Hampton",
-                            "Nash",
-                            "Branch",
-                            "Calderon"]
-list_of_type_lesson = ['Lecture', 'Practice']
-list_of_time_lesson = {1: ['8:00', '9:35'],
-                       2: ['9:45', '11:20'],
-                       3: ['12:10', '13:45'],
-                       4: ['13:55', '15:30']}
+from utils.TestData import list_of_lesson_name, list_of_time_lesson, list_of_type_lesson, list_of_teacher_name
 class PairTeacherLesson:
     def __init__(self, teacher, lesson):
         self.teacher = teacher
