@@ -8,17 +8,22 @@ group_by_filter = [{
 		"data": [
 		{
 			"course": 1,
-			"group": ["МО-111", "ПРО-123"]
+			"group": ["МО-111", "ПРО-129"]
 		},
 		{
 			"course": 2,
-			"group": ["МО-222", "ПРО-223"]
+			"group": ["МО-222", "ПРО-229"]
 		},
 		{
 			"course": 3,
 			"group": ["МО-333", "ПРО-329"]
+		},
+		{
+			"course": 4,
+			"group": ["МО-444", "ПРО-429"]
 		}
-				]
+
+		]
 	},
 	{
 		"faculty": "ИНЭК",
@@ -33,11 +38,19 @@ group_by_filter = [{
 		},
 		{
 			"course": 3,
-			"group": ["И-333", "М-367"]
+			"group": ["И-333", "М-323"]
+		},
+		{
+			"course": 4,
+			"group": ["И-444", "М-423"]
 		}
 				]
 	}]
 
+#!!!
+#СЕМЕН ПРОВЕРЬ ТАК ЛИ У ТЕБЯ ВЫГЛЯДИТ ЭТОТ УЧАСТОК КОДА
+#ПРАВИЛЬНАЯ ВЕРСИЯ У ТЕБЯ, ПОЭТОМУ ОСТАВЛЯЙ СВОЙ ВАРИАНТ
+#!!!
 @router.get("/filter_faculty")
 def get_all_faculty():
     return  [
@@ -53,10 +66,11 @@ def get_all_course():
 def get_all_week():
     return  list(i for i in range(1,25))
 
-@router.get("/group_by_filter")
+###КОНЕЦ СПОРНОГО КОДА
+@router.get("/groupByFilter")
 def get_group_by_filter(faculty: str, course: int):
     for filt in group_by_filter:
         if filt['faculty'] == faculty:
             for cour in filt['data']:
                 if cour['course'] == course:
-                    return cour['group']
+                    return [{'groupName':cour['group']}]
