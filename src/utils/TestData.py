@@ -23,6 +23,7 @@ list_of_time_lesson = {1: ['8:00', '9:35'],
                        4: ['13:55', '15:30']}
 group_by_filter = [{
         "faculty": "ФИРТ",
+        "cafedra": ['ВМиК','АСУ'],
         "data": [
         {
             "course": 1,
@@ -45,6 +46,7 @@ group_by_filter = [{
     },
     {
         "faculty": "ИНЭК",
+        "cafedra": ['КЭТ','КИТЯМ'],
         "data": [
         {
             "course": 1,
@@ -72,6 +74,18 @@ def get_all_group():
                 list_of_all_group.extend(cour['group'])
     return list_of_all_group
 
+
+def get_all_faculty():
+    list_of_all_faculty = []
+    for filt in group_by_filter:
+            list_of_all_faculty.append(filt['faculty'])
+    return [{'faculty': list_of_all_faculty}]
+
+def get_cafedra_by_faculty(faculty: str):
+
+    for filt in group_by_filter:
+        if filt['faculty'] == faculty:
+            return [{'cafedra': filt['cafedra']}]
 def get_group_by_filter(faculty: str, course: int):
     for filt in group_by_filter:
         if filt['faculty'] == faculty:
