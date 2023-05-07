@@ -81,6 +81,12 @@ def get_all_faculty():
             list_of_all_faculty.append(filt['faculty'])
     return [{'faculty': list_of_all_faculty}]
 
+def get_all_cafedra():
+    list_of_all_cafedra = []
+    for caf in group_by_filter:
+            list_of_all_cafedra.append(caf['cafedra'])
+    return [{'faculty': list_of_all_cafedra}]
+
 def get_cafedra_by_faculty(faculty: str):
 
     for filt in group_by_filter:
