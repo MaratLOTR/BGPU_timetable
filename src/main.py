@@ -3,13 +3,14 @@ from routers import group
 import uvicorn
 #from db_pack.crud import Database
 #from db import crud, model
-from routers import group, filter_group
+from routers import group, filter_group, teacher_filter
 #from db.database import SessionLocal, engine
 
 
 app = FastAPI()
 app.include_router(group.router)
 app.include_router(filter_group.router)
+app.include_router(teacher_filter.router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
