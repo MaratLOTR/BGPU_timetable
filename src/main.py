@@ -22,12 +22,6 @@ if __name__ == "__main__":
 #     res = db.get_list_group_and_student(faculty, name_group= group)
 #     return res
 
-
-
-
-
-
-
 # from parser_excel.main_parser import start_parser
 #
 #
