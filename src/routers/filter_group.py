@@ -10,8 +10,6 @@ def get_all_faculty():
              "week": list(str(i) for i in range(1, 25))}
             ]
 
-
-###КОНЕЦ СПОРНОГО КОДА
 @router.get("/groupByFilter")
 def group_by_filter(faculty: str, course: int):
     if faculty != "" and course != None:

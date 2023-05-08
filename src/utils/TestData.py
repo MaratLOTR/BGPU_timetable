@@ -66,6 +66,21 @@ group_by_filter = [{
         }
                 ]
     }]
+def _generate_cafedra_teacher():
+    cafedra = get_all_cafedra()
+    list_of_teacher_name_copy = list_of_teacher_name.copy()
+    dict_of_cafedra_teacher = {}
+    for caf in cafedra:
+        dict_of_cafedra_teacher[caf] = []
+    while len(list_of_teacher_name_copy)!=0:
+        for caf in cafedra:
+            if len(list_of_teacher_name_copy)>0:
+                dict_of_cafedra_teacher[caf].append(list_of_teacher_name_copy[0])
+                list_of_teacher_name_copy.pop(0)
+            else:
+                break
+    return dict_of_cafedra_teacher
+
 
 def get_all_group():
     list_of_all_group = []
@@ -84,17 +99,22 @@ def get_all_faculty():
 def get_all_cafedra():
     list_of_all_cafedra = []
     for caf in group_by_filter:
-            list_of_all_cafedra.append(caf['cafedra'])
-    return [{'faculty': list_of_all_cafedra}]
+            list_of_all_cafedra.extend(caf['cafedra'])
+    return list_of_all_cafedra
 
 def get_cafedra_by_faculty(faculty: str):
-
     for filt in group_by_filter:
         if filt['faculty'] == faculty:
-            return [{'cafedra': filt['cafedra']}]
+            return filt['cafedra']
 def get_group_by_filter(faculty: str, course: int):
     for filt in group_by_filter:
         if filt['faculty'] == faculty:
             for cour in filt['data']:
                 if cour['course'] == course:
                     return [{'groupName':cour['group']}]
+
+def _get_cafedra_teacher_by_filter(faculty: str, cafedra: str):
+    cafedra_teacher = _generate_cafedra_teacher()
+    for caf in cafedra_teacher:
+        if caf == cafedra:
+            return cafedra_teacher[caf]
