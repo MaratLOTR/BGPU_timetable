@@ -1,6 +1,4 @@
-from enum import StrEnum
-
-class TypeOfTheLesson(StrEnum):
-    lecture = 'Lesson',
+class TypeOfTheLesson():
+    lecture = 'PairTeacherLesson',
     practice = 'Practice',
     exam = 'Exam'
