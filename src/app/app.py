@@ -10,12 +10,6 @@ import schemas
 app = FastAPI()
 #app.include_router(group.group_filter)
 #
-@app.get("/filter")
-def filter(faculty: str, group: str, week:int):
-    return {123}
-    #db = Database()
-    #res = db.get_list_group_and_student(faculty, name_group= group)
-    #return res
 
 
 
