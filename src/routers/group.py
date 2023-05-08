@@ -1,9 +1,20 @@
 from fastapi import APIRouter
+
 router = APIRouter()
 from utils.date import get_days_by_week
+
+
 @router.get("/getDaysOfWeek")
-def get_date_by_week(week:str):
-    return get_days_by_week(int(week))
+def get_date_by_week(week: str):
+    if week != "":
+        print("week", week)
+        return get_days_by_week(int(week))
+    else:
+        return get_days_by_week(4)
+        #return [{'date': "date.day", "day_of_the_week": "day_of_week"}]
+
+
+schedule = create_fake_schedule()
 
 
 @router.get("/scheduleForADay")

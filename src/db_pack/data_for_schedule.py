@@ -1,4 +1,4 @@
 class TypeOfTheLesson():
-    lecture = 'PairTeacherLesson',
+    lecture = 'Lesson',
     practice = 'Practice',
     exam = 'Exam'
