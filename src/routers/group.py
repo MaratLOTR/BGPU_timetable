@@ -1,15 +1,11 @@
 from fastapi import APIRouter
 router = APIRouter()
-from db_pack import fake_query
-import datetime
-from .create_new_schedule import create_fake_schedule
 from utils.date import get_days_by_week
 @router.get("/getDaysOfWeek")
 def get_date_by_week(week:str):
-    return [get_days_by_week(int(week))]
+    return get_days_by_week(int(week))
 
 
-schedule = create_fake_schedule()
 @router.get("/scheduleForADay")
 def get_schedule_for_day(group: str, week: str, day_of_the_week: str):
     schedule_in_a_day = []
@@ -20,5 +16,6 @@ def get_schedule_for_day(group: str, week: str, day_of_the_week: str):
             del response_sch['groupName']
             del response_sch['date']
             del response_sch['dayOfTheWeek']
+            del response_sch['cafedra']
             schedule_in_a_day.append(response_sch)
     return schedule_in_a_day
