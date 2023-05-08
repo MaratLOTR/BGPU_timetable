@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from utils.TestData import get_all_faculty, get_cafedra_by_faculty
+from utils.TestData import get_all_faculty, get_cafedra_by_faculty, _get_cafedra_teacher_by_filter
 
 router = APIRouter()
 
@@ -15,7 +15,7 @@ def get_filter_teacher(faculty: str):
 
 @router.get("/getTeacherByFilter")
 def get_teacher_by_filter(faculty: str, cafedra: str):
-        get
+    return [{'teacherName':_get_cafedra_teacher_by_filter(faculty, cafedra)}]
 
 # @router.get("/groupByFilter")
 # def group_by_filter(faculty: str, course: int):
